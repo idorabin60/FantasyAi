@@ -1,0 +1,23 @@
+[project]
+name = "players_status_analyzer"
+version = "0.1.0"
+description = "players_status_analyzer using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=0.201.1,<1.0.0"
+]
+
+[project.scripts]
+players_status_analyzer = "players_status_analyzer.main:run"
+run_crew = "players_status_analyzer.main:run"
+train = "players_status_analyzer.main:train"
+replay = "players_status_analyzer.main:replay"
+test = "players_status_analyzer.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

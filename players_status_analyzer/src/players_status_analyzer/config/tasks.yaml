@@ -1,0 +1,14 @@
+get_player_status_task:
+  description: >
+    Get the status of the player: {player_name} in the sport5 fantasy league for today's date: {current_date}, the status will be one of the following:
+    - "will start"
+    - "will not start"
+    - "might not start"
+    its very imporant to be accurate and not to make up a status.
+    the status is for the next champions league game.
+    search the web for the player name and return the status.
+    the player name is: {player_name}
+  expected_output: >
+    The status of the player in the sport5 fantasy league. that will provide the user information if the player will start or not in the next champions league game.
+    Explain how did you get to this Conclusion
+  agent: player_status_researcher
