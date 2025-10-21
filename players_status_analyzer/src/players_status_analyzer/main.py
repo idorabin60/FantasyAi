@@ -54,6 +54,6 @@ def run():
     Run the crew.
     """
     players = get_starters(
-        url=URL, email=EMAIL, password=PASSWORD, headless=True)
+        url=URL, email=EMAIL, password=PASSWORD, headless=False)
     for player in players:
         run_for_a_single_user(player)
