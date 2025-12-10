@@ -1,14 +1,49 @@
 get_player_status_task:
   description: >
-    Get the status of the player: {player_name} in the sport5 fantasy league for today's date: {current_date}, the status will be one of the following:
+    Determine the status of player {player_name} in the Sport5 fantasy league
+    for today's date: {current_date}, **only for a Champions League game
+    that is played TODAY or TOMORROW**.
+
+    The status MUST be exactly one of:
     - "will start"
     - "will not start"
     - "might not start"
-    its very imporant to be accurate and not to make up a status.
-    the status is for the next champions league game.
-    search the web for the player name and return the status.
-    the player name is: {player_name}
+
+    VERY IMPORTANT:
+    1) First, identify if {player_name}'s team has a Champions League match
+       scheduled for today ({current_date}) or tomorrow (the next calendar day).
+    2) If there is NO such match (for example, the next UCL match is in 5 days,
+       or the last UCL match was yesterday), you MUST return:
+       - status: "might not start"
+       - reason: explain that there is no UCL game today or tomorrow.
+    3) If there IS a UCL match today or tomorrow, you MUST:
+       - check predicted lineups and/or official lineups for that exact match,
+       - verify the date in the article matches the match date,
+       - check very recent injury/suspension/rotation news.
+
+    You MUST NOT:
+    - Use lineups or previews for past Champions League matches as if they are
+      about today's/tomorrow's match.
+    - Use generic season statistics to guess a status.
+
+    If official lineups are already available, you should base the status
+    directly on them. Otherwise, use multiple recent predicted XI sources.
+
   expected_output: >
-    The status of the player in the sport5 fantasy league. that will provide the user information if the player will start or not in the next champions league game.
-    Explain how did you get to this Conclusion
+    Return a JSON object with the following fields:
+
+    {
+      "status": "<one of 'will start' | 'will not start' | 'might not start'>",
+      "reason": "<2–6 sentences explaining the decision. Explicitly mention
+                  the UCL match date and whether it is today or tomorrow.>",
+      "sources": ["<URL1>", "<URL2>", "..."],
+      "as_of": "<ISO timestamp when you made this decision, e.g. '2025-12-09T19:45:00+03:00'>"
+    }
+
+    - If there is no UCL match for the player's team today or tomorrow,
+      the reason MUST clearly say: "There is no Champions League match
+      for [team] on {current_date} or the following day."
+    - Always state which fixture you are talking about, with the opponent
+      and the date (e.g., "Atalanta vs Chelsea on 2025-12-09").
+
   agent: player_status_researcher

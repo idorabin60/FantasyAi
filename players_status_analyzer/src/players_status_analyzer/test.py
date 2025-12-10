@@ -148,9 +148,7 @@ def get_starters(url: str, email: str, password: str, headless: bool = True):
 
         # --- Wait for post-login content ---
         try:
-            page.wait_for_url("**/my-team*", timeout=20_000)
-            page.goto("https://fantasyleague.sport5.co.il/user-team/120943")
-            page.wait_for_url("**/user-team*", timeout=20_000)
+            page.goto("https://fantasyleague.sport5.co.il/user-team/118456")
         except PWTimeout:
             # Fallback: wait for a key element on the team page
             page.locator(
@@ -167,5 +165,3 @@ def get_starters(url: str, email: str, password: str, headless: bool = True):
 
 players = get_starters(
     url=URL, email=EMAIL, password=PASSWORD, headless=False)
-
-print(players)

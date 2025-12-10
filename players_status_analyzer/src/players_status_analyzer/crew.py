@@ -65,6 +65,9 @@ class PlayersStatusAnalyzer():
             tasks=self.tasks,  # Automatically created by the @task decorator
             process=Process.sequential,
             verbose=True,
-            llm=LLM(model="openai/gpt-4o", temperature=0)
+            llm=LLM(model="openai/gpt-4o", temperature=0),
+            memory=False,        # no memory, no RAG storage
+            embedder=None,       # don’t auto-create an embedder
+            share_crew=False,    # don’t share runs with CrewAI
             # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
         )
